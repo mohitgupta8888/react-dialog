@@ -1,4 +1,5 @@
 import React from "react";
+import { Resizable } from "react-resizable";
 import Draggable from "react-draggable";
 import DialogTitle from "./DialogTitle";
 import DialogBody from "./DialogBody";
@@ -11,6 +12,8 @@ class Dialog extends React.Component {
         this.closeOnEscape = this.closeOnEscape.bind(this);
 
         this.state = {
+            height: props.height || 300,
+            width: props.width || 500,
             isMinimized: false,
             isMaximized: false
         };
@@ -46,6 +49,10 @@ class Dialog extends React.Component {
         this.setState({ isMinimized: false, isMaximized: false });
     }
 
+    onResize = (event, { element, size }) => {
+        this.setState({ width: size.width, height: size.height });
+    }
+
     getDialogTitle = () => {
         return (
             <DialogTitle
@@ -59,6 +66,7 @@ class Dialog extends React.Component {
                 onMaximize={this.onMaximize}
                 onRestore={this.onRestore}
                 onClose={this.onClose}
+                titlebuttons={this.props.titlebuttons}
             />
         );
     }
@@ -76,16 +84,31 @@ class Dialog extends React.Component {
             return false;
         }
 
+        var internalDialog = (
+            <div style={{ height: this.state.height, width: this.state.width } + "transform:translate(-50%,-50%); top:50%; left:50%"} className={cs("ui-dialog w-60", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized })}>
+                {this.getDialogTitle()}
+                <DialogBody>
+                    {dialogBody}
+                </DialogBody>
+                <DialogFooter buttons={this.props.buttons} onClose={this.onClose}></DialogFooter>
+            </div>
+        );
+
+        var renderableDialog;
+        if (this.props.isResizable) {
+            renderableDialog = (
+                <Resizable className="box" height={this.state.height} width={this.state.width} onResize={this.onResize}>
+                    {internalDialog}
+                </Resizable>
+            );
+        } else {
+            renderableDialog = internalDialog;
+        }
+
         return (
             <div ref={(container) => { this.dialogContainer = container; }} className="backdrop db" tabIndex="-1" onKeyUp={this.closeOnEscape}>
-                <Draggable handle=".ui-dialog-titlebar">
-                    <div className={cs("ui-dialog w-60", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized })}>
-                        {this.getDialogTitle()}
-                        <DialogBody>
-                            {dialogBody}
-                        </DialogBody>
-                        <DialogFooter buttons={this.props.buttons} onClose={this.onClose}></DialogFooter>
-                    </div>
+                <Draggable handle=".ui-dialog-titlebar" bounds="body">
+                    {renderableDialog}
                 </Draggable>
             </div>
         );
@@ -96,6 +119,7 @@ Dialog.propTypes = {
     hasCloseIcon: React.PropTypes.bool,
     hasMinimizeIcon: React.PropTypes.bool,
     hasMaximizeIcon: React.PropTypes.bool,
+    isResizable: React.PropTypes.bool,
     title: React.PropTypes.string,
     body: React.PropTypes.string,
     children: React.PropTypes.array,
@@ -103,7 +127,8 @@ Dialog.propTypes = {
     buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
         text: React.PropTypes.string,
         onClick: React.PropTypes.func
-    }))
+    })),
+    titlebuttons:React.PropTypes.element
 };
 
 export default Dialog;

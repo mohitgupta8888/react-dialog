@@ -47,6 +47,7 @@ const DialogTitle = (props) => {
             {props.title}
             {minimizeIcon}
             {maximizeIcon}
+            {props.titlebuttons}
             {closeIcon}
         </header>
     );
