@@ -19,7 +19,7 @@ class DialogButton extends React.Component {
         return (
             <button
                 type="button"
-                className={cs("button-group__item button mr1", { disabled: this.props.disabled })}
+                className={cs("button", { disabled: this.props.disabled })}
                 disabled={this.props.disabled}
                 onClick={this.onClick}>
                 {this.props.text}

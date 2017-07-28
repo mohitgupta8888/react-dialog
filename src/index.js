@@ -7,11 +7,11 @@ import DialogBody from "./DialogBody";
 import DialogFooter from "./DialogFooter";
 import cs from "classnames";
 import EventStack from "active-event-stack";
+import centerComponent from 'react-center-component';
 
 class Dialog extends React.Component {
     constructor(props) {
         super(props);
-        //this.closeOnEscape = this.closeOnEscape.bind(this);
 
         this.state = {
             height: props.height || 300,
@@ -39,14 +39,6 @@ class Dialog extends React.Component {
     componentDidMount() {
         this.dialogContainer.focus();
     }
-
-    // handleGlobalKeydown = (event) => {
-    //     if (keycode(event) === 'esc') {
-    //         if (typeof this.props.onClose == 'function') {
-    //             this.props.onClose(event);
-    //         }
-    //     }
-    // }
 
     handleGlobalKeydown = (e) => {
         if (e.keyCode == 27) {
@@ -114,7 +106,7 @@ class Dialog extends React.Component {
         }
 
         var internalDialog = (
-            <div style={{ height: this.state.height, width: this.state.width, top: "50%", left: "50%" }} className={cs("ui-dialog w-60 overflow-y-auto", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized })}>
+            <div style={{ height: this.state.height, width: this.state.width }} className={cs("ui-dialog", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized })}>
                 {this.getDialogTitle()}
                 <DialogBody>
                     {dialogBody}
@@ -135,12 +127,16 @@ class Dialog extends React.Component {
         }
 
         return (
-            <div ref={(container) => { this.dialogContainer = container; }} className={cs("db", { "backdrop": this.props.modal !== false })}>
-                <Draggable handle=".ui-dialog-titlebar" bounds="body" defaultPosition={{
-                    x: (- this.state.width / 2), y: (- this.state.height / 2)
-                }}>
+            <div
+                ref={(container) => { this.dialogContainer = container; }}
+                className={cs("ui-dialog-container")}>
+                <Draggable handle=".ui-dialog-titlebar" bounds="body">
                     {renderableDialog}
                 </Draggable>
+                {
+                    this.props.modal &&
+                    <div className="ui-dialog-overlay" style={{ zIndex: 100 }}></div>
+                }
             </div>
         );
     }

@@ -1,12 +1,15 @@
 import PropTypes from "prop-types";
 import React from "react";
+import CloseIcon from "./CloseIcon";
 
 const DialogTitle = (props) => {
     var closeIcon;
     if (props.hasCloseIcon !== false) {
-        closeIcon = <span className="close-icon">
-            <i className="icon icon-close pointer" onClick={props.onClose}></i>
-        </span>;
+        closeIcon = (
+            <a className="ui-close" onClick={props.onClose}>
+                <CloseIcon diameter={30} />
+            </a>
+        );
     }
 
     var minimizeIcon;
@@ -44,8 +47,8 @@ const DialogTitle = (props) => {
     }
 
     return (
-        <header className="ui-dialog-titlebar mb4">
-            <div className="title__heading flex-1 mr1">
+        <header className="ui-dialog-titlebar">
+            <div className="title">
                 {props.title}
             </div>
             <div className="action-items">
