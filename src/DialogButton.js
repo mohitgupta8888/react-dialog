@@ -1,9 +1,12 @@
+import PropTypes from "prop-types";
 import React from "react";
+import cs from "classnames";
 
 class DialogButton extends React.Component {
     close = () => {
-        if (this.props.onClose)
+        if (this.props.onClose) {
             this.props.onClose();
+        }
     }
 
     onClick = () => {
@@ -14,15 +17,22 @@ class DialogButton extends React.Component {
 
     render() {
         return (
-            <button type="button" className="button-group__item button mr1" onClick={this.onClick}>{this.props.text}</button>
+            <button
+                type="button"
+                className={cs("button-group__item button mr1", { disabled: this.props.disabled })}
+                disabled={this.props.disabled}
+                onClick={this.onClick}>
+                {this.props.text}
+            </button>
         );
     }
 }
 
 DialogButton.propTypes = {
-    text: React.PropTypes.string.isRequired,
-    onClick: React.PropTypes.func.isRequired,
-    onClose: React.PropTypes.func.isRequired
+    text: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+    disabled: PropTypes.bool
 };
 
 export default DialogButton;

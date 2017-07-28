@@ -1,10 +1,11 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 const DialogTitle = (props) => {
     var closeIcon;
     if (props.hasCloseIcon !== false) {
         closeIcon = <span className="close-icon">
-            <i className="icon icon-close" onClick={props.onClose}></i>
+            <i className="icon icon-close pointer" onClick={props.onClose}></i>
         </span>;
     }
 
@@ -12,14 +13,14 @@ const DialogTitle = (props) => {
     if (props.hasMinimizeIcon) {
         if (props.isMinimized) {
             minimizeIcon = (
-                <span className="close-icon">
-                    <i className="icon icon-fullscreencollapsemode_op2-01" onClick={props.onRestore}></i>
+                <span className="dib mr2">
+                    <i className="pointer icon icon-enlarge2" onClick={props.onRestore}></i>
                 </span>
             );
         } else {
             minimizeIcon = (
-                <span className="close-icon">
-                    <i className="icon icon-process" onClick={props.onMinimize}></i>
+                <span className="dib mr2">
+                    <i className="icon icon-shrink2 pointer" onClick={props.onMinimize}></i>
                 </span>
             );
         }
@@ -29,14 +30,14 @@ const DialogTitle = (props) => {
     if (props.hasMaximizeIcon) {
         if (props.isMaximized) {
             maximizeIcon = (
-                <span className="close-icon">
-                    <i className="icon icon-fullscreencollapsemode_op2-01" onClick={props.onRestore}></i>
+                <span className="dib mr2">
+                    <i className="icon icon-shrink2" onClick={props.onRestore}></i>
                 </span>
             );
         } else {
             maximizeIcon = (
-                <span className="close-icon">
-                    <i className="icon icon-fullscreen" onClick={props.onMaximize}></i>
+                <span className="dib mr2">
+                    <i className="icon icon-enlarge2 pointer" onClick={props.onMaximize}></i>
                 </span>
             );
         }
@@ -44,26 +45,30 @@ const DialogTitle = (props) => {
 
     return (
         <header className="ui-dialog-titlebar mb4">
-            {props.title}
-            {minimizeIcon}
-            {maximizeIcon}
-            {props.titlebuttons}
-            {closeIcon}
+            <div className="title__heading flex-1 mr1">
+                {props.title}
+            </div>
+            <div className="action-items">
+                {minimizeIcon}
+                {maximizeIcon}
+                {props.titlebuttons}
+                {closeIcon}
+            </div>
         </header>
     );
 };
 
 DialogTitle.propTypes = {
-    hasCloseIcon: React.PropTypes.bool,
-    hasMinimizeIcon: React.PropTypes.bool,
-    hasMaximizeIcon: React.PropTypes.bool,
-    isMinimized: React.PropTypes.bool,
-    isMaximized: React.PropTypes.bool,
-    title: React.PropTypes.string,
-    onClose: React.PropTypes.func.isRequired,
-    onMinimize: React.PropTypes.func,
-    onMaximize: React.PropTypes.func,
-    onRestore: React.PropTypes.func
+    hasCloseIcon: PropTypes.bool,
+    hasMinimizeIcon: PropTypes.bool,
+    hasMaximizeIcon: PropTypes.bool,
+    isMinimized: PropTypes.bool,
+    isMaximized: PropTypes.bool,
+    title: PropTypes.string,
+    onClose: PropTypes.func.isRequired,
+    onMinimize: PropTypes.func,
+    onMaximize: PropTypes.func,
+    onRestore: PropTypes.func
 };
 
 export default DialogTitle;

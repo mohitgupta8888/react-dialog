@@ -1,9 +1,10 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 class DialogBody extends React.Component {
     render() {
         return (
-            <div className="ui-dialog-content">
+            <div className="ui-dialog-content custom--filters pa2">
                 {this.props.children}
             </div>
         );
@@ -11,7 +12,7 @@ class DialogBody extends React.Component {
 }
 
 DialogBody.propTypes = {
-    children: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object])
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };
 
 export default DialogBody;

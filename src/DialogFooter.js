@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import DialogButton from "./DialogButton";
 
@@ -22,8 +23,8 @@ const DialogFooter = (props) => {
 };
 
 DialogFooter.propTypes = {
-    buttons: React.PropTypes.array,
-    onClose: React.PropTypes.func.isRequired
+    buttons: PropTypes.array,
+    onClose: PropTypes.func.isRequired
 };
 
 export default DialogFooter;

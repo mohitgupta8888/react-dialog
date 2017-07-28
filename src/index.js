@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Resizable } from "react-resizable";
 import Draggable from "react-draggable";
@@ -5,11 +6,12 @@ import DialogTitle from "./DialogTitle";
 import DialogBody from "./DialogBody";
 import DialogFooter from "./DialogFooter";
 import cs from "classnames";
+import EventStack from "active-event-stack";
 
 class Dialog extends React.Component {
     constructor(props) {
         super(props);
-        this.closeOnEscape = this.closeOnEscape.bind(this);
+        //this.closeOnEscape = this.closeOnEscape.bind(this);
 
         this.state = {
             height: props.height || 300,
@@ -19,11 +21,34 @@ class Dialog extends React.Component {
         };
     }
 
+    componentWillMount() {
+        /**
+         * This is done in the componentWillMount instead of the componentDidMount
+         * because this way, a modal that is a child of another will have register
+         * for events after its parent
+         */
+        this.eventToken = EventStack.addListenable([
+            ["keydown", this.handleGlobalKeydown]
+        ]);
+    }
+
+    componentWillUnmount = () => {
+        EventStack.removeListenable(this.eventToken);
+    }
+
     componentDidMount() {
         this.dialogContainer.focus();
     }
 
-    closeOnEscape = (e) => {
+    // handleGlobalKeydown = (event) => {
+    //     if (keycode(event) === 'esc') {
+    //         if (typeof this.props.onClose == 'function') {
+    //             this.props.onClose(event);
+    //         }
+    //     }
+    // }
+
+    handleGlobalKeydown = (e) => {
         if (e.keyCode == 27) {
             e.stopPropagation();
             this.onClose();
@@ -76,16 +101,20 @@ class Dialog extends React.Component {
         var dialogBody;
         if (this.props.children) {
             dialogBody = this.props.children;
-        } else if (this.props.body) {
+        } else if (React.isValidElement(this.props.body)) {
+            dialogBody = this.props.body;
+        } else if (typeof this.props.body === "string") {
             dialogBody = <div className="dialog-body" dangerouslySetInnerHTML={{ __html: this.props.body }}></div>;
         } else {
-            console.error("Dialog component could not render. Neither \"children\" nor \"body\" found in props.");
+            if (!PRODUCTION) {
+                __debug.error("Dialog component could not render. Neither \"children\" nor \"body\" found in props.");
+            }
 
             return false;
         }
 
         var internalDialog = (
-            <div style={{ height: this.state.height, width: this.state.width } + "transform:translate(-50%,-50%); top:50%; left:50%"} className={cs("ui-dialog w-60", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized })}>
+            <div style={{ height: this.state.height, width: this.state.width, top: "50%", left: "50%" }} className={cs("ui-dialog w-60 overflow-y-auto", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized })}>
                 {this.getDialogTitle()}
                 <DialogBody>
                     {dialogBody}
@@ -106,8 +135,10 @@ class Dialog extends React.Component {
         }
 
         return (
-            <div ref={(container) => { this.dialogContainer = container; }} className="backdrop db" tabIndex="-1" onKeyUp={this.closeOnEscape}>
-                <Draggable handle=".ui-dialog-titlebar" bounds="body">
+            <div ref={(container) => { this.dialogContainer = container; }} className={cs("db", { "backdrop": this.props.modal !== false })}>
+                <Draggable handle=".ui-dialog-titlebar" bounds="body" defaultPosition={{
+                    x: (- this.state.width / 2), y: (- this.state.height / 2)
+                }}>
                     {renderableDialog}
                 </Draggable>
             </div>
@@ -116,19 +147,23 @@ class Dialog extends React.Component {
 }
 
 Dialog.propTypes = {
-    hasCloseIcon: React.PropTypes.bool,
-    hasMinimizeIcon: React.PropTypes.bool,
-    hasMaximizeIcon: React.PropTypes.bool,
-    isResizable: React.PropTypes.bool,
-    title: React.PropTypes.string,
-    body: React.PropTypes.string,
-    children: React.PropTypes.array,
-    onClose: React.PropTypes.func.isRequired,
-    buttons: React.PropTypes.arrayOf(React.PropTypes.shape({
-        text: React.PropTypes.string,
-        onClick: React.PropTypes.func
+    height: PropTypes.number,
+    width: PropTypes.number,
+    modal: PropTypes.bool,
+    hasCloseIcon: PropTypes.bool,
+    hasMinimizeIcon: PropTypes.bool,
+    hasMaximizeIcon: PropTypes.bool,
+    isResizable: PropTypes.bool,
+    title: PropTypes.string,
+    body: PropTypes.string,
+    children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+    onClose: PropTypes.func.isRequired,
+    buttons: PropTypes.arrayOf(PropTypes.shape({
+        text: PropTypes.string,
+        onClick: PropTypes.func
     })),
-    titlebuttons:React.PropTypes.element
+    titlebuttons: PropTypes.element,
+    isFooter: PropTypes.bool
 };
 
 export default Dialog;
