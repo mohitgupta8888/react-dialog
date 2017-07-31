@@ -1,8 +1,8 @@
 {
-  "name": "react-input-calendar",
-  "description": "Datepicker widget react component",
-  "author": "Rudeg <rudenko.sergey92@gmail.com> (https://github.com/Rudeg)",
-  "user": "Rudeg",
+  "name": "react-dialog",
+  "description": "Dialog component in react",
+  "author": "Mohit Gupta <mohitgupta8888@gmail.com> (https://github.com/mohitgupta)",
+  "user": "mohitgupta8888",
   "version": "0.3.14",
   "scripts": {
     "prepublish": "bash .scripts/prepublish.sh",
@@ -61,11 +61,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Rudeg/react-input-calendar"
+    "url": "https://github.com/mohitgupta8888/react-dialog"
   },
-  "homepage": "http://rudeg.github.io/react-input-calendar/",
+  "homepage": "https://mohitgupta8888.github.io/react-dialog/",
   "bugs": {
-    "url": "https://github.com/Rudeg/react-input-calendar/issues"
+    "url": "https://github.com/mohitgupta8888/react-dialog/issues"
   },
   "keywords": [
     "react",
