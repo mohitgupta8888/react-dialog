@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import React from "react";
-import CloseIcon from "./CloseIcon";
+//import CloseIcon from "./CloseIcon";
 
 const DialogTitle = (props) => {
     var closeIcon;
     if (props.hasCloseIcon !== false) {
         closeIcon = (
             <a className="ui-close" onClick={props.onClose}>
-                <CloseIcon diameter={30} />
+                <i className="icon-close"></i>
             </a>
         );
     }

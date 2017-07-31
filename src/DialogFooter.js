@@ -16,8 +16,10 @@ const DialogFooter = (props) => {
         return false;
 
     return (
-        <div className="ui-dialog-buttonpane ui-dialog-buttonset">
-            {dialogButtons}
+        <div className="ui-dialog-buttonpane">
+            <div className="ui-dialog-buttonset">
+                {dialogButtons}
+            </div>
         </div>
     );
 };

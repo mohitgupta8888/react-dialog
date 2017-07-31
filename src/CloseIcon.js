@@ -6,13 +6,13 @@ const MARGIN = 8;
 
 const CloseIcon = (props) => {
     const {
-    diameter,
-  } = props;
+        diameter,
+    } = props;
 
     const radius = diameter / 2;
 
     return <svg width={diameter} height={diameter}>
-        <circle cx={radius} cy={radius} r={radius} fill="black" />
+        <circle cx={radius} cy={radius} r={radius} />
         <g transform={`rotate(45 ${diameter / 2} ${diameter / 2})`}>
             <rect
                 x={MARGIN}

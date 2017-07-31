@@ -20,6 +20,63 @@
     background-color: white;
 }
 
+.ui-dialog .ui-dialog-titlebar {
+    padding: 0.1em .5em;
+    position: relative;
+    font-size: 1em;
+    border-radius: 3px;
+    margin: 0.5em;
+    height: 35px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.ui-dialog .ui-dialog-titlebar .action-items {
+    float: right;
+    position: relative;
+}
+
+.ui-dialog .ui-dialog-titlebar .title {
+    float: left;
+    margin-right: .5em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+}
+
+.ui-dialog .ui-dialog-titlebar .ui-close{
+    width: 32px;
+    height: 32px;
+    transition: 'transform 0.1s';
+    position: relative;
+}
+.icon-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  opacity: 0.3;
+}
+.icon-close:hover {
+  opacity: 1;
+}
+.icon-close:before, .icon-close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 33px;
+  width: 2px;
+  background-color: #333;
+}
+.icon-close:before {
+  transform: rotate(45deg);
+}
+.icon-close:after {
+  transform: rotate(-45deg);
+}
+
+
+
+
 .ui-dialog .ui-dialog-content {
     background: none repeat scroll 0 0 transparent;
     border: 0 none;
@@ -28,61 +85,30 @@
     padding: .5em 1em;
 }
 
-.ui-dialog .ui-dialog-titlebar {
-    padding: 0.1em .5em;
-    position: relative;
-    font-size: 1em;
-    background-color: gray;
-    border-radius: 3px;
-    margin: 0.5em;
-    height: 35px;
-}
-
-.ui-dialog .ui-dialog-titlebar .action-items {
-    float: right;
-}
-
-.ui-dialog .ui-dialog-titlebar .title {
-    float: left;
-    margin-right: .5em;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.5em;
-}
-
-.ui-dialog .ui-dialog-titlebar .ui-close {
-    width: 30px;
-    height: 30px;
-}
-
-.ui-dialog-titlebar .ui-close{
-    position: 'absolute';
-    top: 0;
-    left: -50;
-    display: 'block';
-    width: 40;
-    height: 40;
-    transition: 'transform 0.1s';
-}
-
-.ui-dialog-titlebar .ui-close:hover {
-    transform: 'scale(1.1)',
-};
-
 .ui-dialog .ui-dialog-buttonpane {
-	text-align: left;
-	border-width: 1px 0 0 0;
-	background-image: none;
-	margin-top: .5em;
-	padding: .3em 1em .5em .4em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
-.ui-dialog .ui-dialog-buttonpane.ui-dialog-buttonset {
-	float: right;
+
+.ui-dialog-buttonpane .ui-dialog-buttonset{
+    text-align: right;
+    border-width: 1px 0 0 0;
+    margin: .3em 1em .5em .4em;
+    border-top: 1px solid #f6f6f6;
 }
+
 .ui-dialog .ui-dialog-buttonpane button {
 	margin: .5em .4em .5em 0;
     cursor: pointer;
     background-color: #f6f6f6;
     padding: 0.5em 1em;
     outline: none;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px;
+}
+
+.ui-dialog .ui-dialog-buttonpane button:hover{
+    background-color: #CCCCCC;
+    border: 1px solid #BBBBBB;
 }
