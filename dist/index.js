@@ -58,6 +58,10 @@ var _activeEventStack = require("active-event-stack");
 
 var _activeEventStack2 = _interopRequireDefault(_activeEventStack);
 
+var _reactCenterComponent = require("react-center-component");
+
+var _reactCenterComponent2 = _interopRequireDefault(_reactCenterComponent);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Dialog = function (_React$Component) {
@@ -65,8 +69,6 @@ var Dialog = function (_React$Component) {
 
     function Dialog(props) {
         (0, _classCallCheck3.default)(this, Dialog);
-
-        //this.closeOnEscape = this.closeOnEscape.bind(this);
 
         var _this = (0, _possibleConstructorReturn3.default)(this, (Dialog.__proto__ || (0, _getPrototypeOf2.default)(Dialog)).call(this, props));
 
@@ -146,15 +148,6 @@ var Dialog = function (_React$Component) {
         value: function componentDidMount() {
             this.dialogContainer.focus();
         }
-
-        // handleGlobalKeydown = (event) => {
-        //     if (keycode(event) === 'esc') {
-        //         if (typeof this.props.onClose == 'function') {
-        //             this.props.onClose(event);
-        //         }
-        //     }
-        // }
-
     }, {
         key: "render",
         value: function render() {
@@ -177,7 +170,7 @@ var Dialog = function (_React$Component) {
 
             var internalDialog = _react2.default.createElement(
                 "div",
-                { style: { height: this.state.height, width: this.state.width, top: "50%", left: "50%" }, className: (0, _classnames2.default)("ui-dialog w-60 overflow-y-auto", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized }) },
+                { style: { height: this.state.height, width: this.state.width }, className: (0, _classnames2.default)("ui-dialog", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized }) },
                 this.getDialogTitle(),
                 _react2.default.createElement(
                     _DialogBody2.default,
@@ -200,16 +193,17 @@ var Dialog = function (_React$Component) {
 
             return _react2.default.createElement(
                 "div",
-                { ref: function ref(container) {
+                {
+                    ref: function ref(container) {
                         _this2.dialogContainer = container;
-                    }, className: (0, _classnames2.default)("db", { "backdrop": this.props.modal !== false }) },
+                    },
+                    className: (0, _classnames2.default)("ui-dialog-container") },
                 _react2.default.createElement(
                     _reactDraggable2.default,
-                    { handle: ".ui-dialog-titlebar", bounds: "body", defaultPosition: {
-                            x: -this.state.width / 2, y: -this.state.height / 2
-                        } },
+                    { handle: ".ui-dialog-titlebar", bounds: "body" },
                     renderableDialog
-                )
+                ),
+                this.props.modal && _react2.default.createElement("div", { className: "ui-dialog-overlay", style: { zIndex: 100 } })
             );
         }
     }]);

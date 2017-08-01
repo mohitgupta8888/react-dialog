@@ -6,7 +6,4 @@ import Basic from "./basic";
 storiesOf('React Dialog', module)
   .add('Basic', () => (
     <Basic />
-  ))
-  .add('As Dropdown', () => (
-    <TimePicker timeFormat={"h:mm A"} useSelect={true} />
   ));

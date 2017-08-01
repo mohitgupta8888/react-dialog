@@ -14,13 +14,15 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import CloseIcon from "./CloseIcon";
+
 var DialogTitle = function DialogTitle(props) {
     var closeIcon;
     if (props.hasCloseIcon !== false) {
         closeIcon = _react2.default.createElement(
-            "span",
-            { className: "close-icon" },
-            _react2.default.createElement("i", { className: "icon icon-close pointer", onClick: props.onClose })
+            "a",
+            { className: "ui-close", onClick: props.onClose },
+            _react2.default.createElement("i", { className: "icon-close" })
         );
     }
 
@@ -60,10 +62,10 @@ var DialogTitle = function DialogTitle(props) {
 
     return _react2.default.createElement(
         "header",
-        { className: "ui-dialog-titlebar mb4" },
+        { className: "ui-dialog-titlebar" },
         _react2.default.createElement(
             "div",
-            { className: "title__heading flex-1 mr1" },
+            { className: "title" },
             props.title
         ),
         _react2.default.createElement(

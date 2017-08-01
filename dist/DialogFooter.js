@@ -35,8 +35,12 @@ var DialogFooter = function DialogFooter(props) {
 
     return _react2.default.createElement(
         "div",
-        { className: "footer--popup" },
-        dialogButtons
+        { className: "ui-dialog-buttonpane" },
+        _react2.default.createElement(
+            "div",
+            { className: "ui-dialog-buttonset" },
+            dialogButtons
+        )
     );
 };
 

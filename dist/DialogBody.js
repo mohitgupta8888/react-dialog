@@ -47,7 +47,7 @@ var DialogBody = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 "div",
-                { className: "ui-dialog-content custom--filters pa2" },
+                { className: "ui-dialog-content custom--filters pa2", style: { "overflowY": "auto" } },
                 this.props.children
             );
         }

@@ -70,7 +70,7 @@ var DialogButton = function (_React$Component) {
                 "button",
                 {
                     type: "button",
-                    className: (0, _classnames2.default)("button-group__item button mr1", { disabled: this.props.disabled }),
+                    className: (0, _classnames2.default)("button", { disabled: this.props.disabled }),
                     disabled: this.props.disabled,
                     onClick: this.onClick },
                 this.props.text
