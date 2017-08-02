@@ -3,7 +3,7 @@
   "description": "Dialog component in react",
   "author": "Mohit Gupta <mohitgupta8888@gmail.com> (https://github.com/mohitgupta)",
   "user": "mohitgupta8888",
-  "version": "0.3.14",
+  "version": "0.3.18",
   "scripts": {
     "prepublish": "bash .scripts/prepublish.sh",
     "lint": "eslint src",
@@ -69,14 +69,14 @@
   },
   "keywords": [
     "react",
-    "datepicker",
-    "calendar",
-    "input-datepicker",
-    "input-calendar",
-    "react-input-calendar",
-    "react-calendar",
-    "react-datepicker",
-    "react-component"
+    "dialog",
+    "modal",
+    "react-dialog",
+    "react-modal",
+    "react-popup",
+    "dialog-popup",
+    "bootstrap-modal",
+    "modal-component"
   ],
   "license": "MIT"
 }

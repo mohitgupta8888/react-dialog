@@ -125,7 +125,7 @@ var Dialog = function (_React$Component) {
         };
 
         _this.state = {
-            height: props.height || 300,
+            height: props.height,
             width: props.width || 500,
             isMinimized: false,
             isMaximized: false
@@ -153,7 +153,7 @@ var Dialog = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var dialogBody;
+            var dialogBody = void 0;
             if (this.props.children) {
                 dialogBody = this.props.children;
             } else if (_react2.default.isValidElement(this.props.body)) {
@@ -168,9 +168,9 @@ var Dialog = function (_React$Component) {
                 return false;
             }
 
-            var internalDialog = _react2.default.createElement(
+            var dialog = _react2.default.createElement(
                 "div",
-                { style: { height: this.state.height, width: this.state.width }, className: (0, _classnames2.default)("ui-dialog", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized }) },
+                { style: { height: this.state.height || "auto", width: this.state.width }, className: (0, _classnames2.default)("ui-dialog", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized }) },
                 this.getDialogTitle(),
                 _react2.default.createElement(
                     _DialogBody2.default,
@@ -180,15 +180,20 @@ var Dialog = function (_React$Component) {
                 _react2.default.createElement(_DialogFooter2.default, { buttons: this.props.buttons, onClose: this.onClose })
             );
 
-            var renderableDialog;
             if (this.props.isResizable) {
-                renderableDialog = _react2.default.createElement(
+                dialog = _react2.default.createElement(
                     _reactResizable.Resizable,
                     { className: "box", height: this.state.height, width: this.state.width, onResize: this.onResize },
-                    internalDialog
+                    dialog
                 );
-            } else {
-                renderableDialog = internalDialog;
+            }
+
+            if (this.props.isDraggable) {
+                dialog = _react2.default.createElement(
+                    _reactDraggable2.default,
+                    { handle: ".ui-dialog-titlebar", bounds: "body" },
+                    dialog
+                );
             }
 
             return _react2.default.createElement(
@@ -197,13 +202,9 @@ var Dialog = function (_React$Component) {
                     ref: function ref(container) {
                         _this2.dialogContainer = container;
                     },
-                    className: (0, _classnames2.default)("ui-dialog-container") },
-                _react2.default.createElement(
-                    _reactDraggable2.default,
-                    { handle: ".ui-dialog-titlebar", bounds: "body" },
-                    renderableDialog
-                ),
-                this.props.modal && _react2.default.createElement("div", { className: "ui-dialog-overlay", style: { zIndex: 100 } })
+                    className: (0, _classnames2.default)("ui-dialog-container", { "": this.props.modal }) },
+                dialog,
+                this.props.modal && _react2.default.createElement("div", { className: "ui-dialog-overlay" })
             );
         }
     }]);
