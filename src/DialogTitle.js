@@ -13,7 +13,7 @@ const DialogTitle = (props) => {
     }
 
     var minimizeIcon;
-    if (props.hasMinimizeIcon) {
+    if (props.allowMinimize) {
         if (props.isMinimized) {
             minimizeIcon = (
                 <span className="dib mr2">
@@ -30,7 +30,7 @@ const DialogTitle = (props) => {
     }
 
     var maximizeIcon;
-    if (props.hasMaximizeIcon) {
+    if (props.allowMaximize) {
         if (props.isMaximized) {
             maximizeIcon = (
                 <span className="dib mr2">
@@ -63,8 +63,8 @@ const DialogTitle = (props) => {
 
 DialogTitle.propTypes = {
     hasCloseIcon: PropTypes.bool,
-    hasMinimizeIcon: PropTypes.bool,
-    hasMaximizeIcon: PropTypes.bool,
+    allowMinimize: PropTypes.bool,
+    allowMaximize: PropTypes.bool,
     isMinimized: PropTypes.bool,
     isMaximized: PropTypes.bool,
     title: PropTypes.string,

@@ -27,7 +27,7 @@ var DialogTitle = function DialogTitle(props) {
     }
 
     var minimizeIcon;
-    if (props.hasMinimizeIcon) {
+    if (props.allowMinimize) {
         if (props.isMinimized) {
             minimizeIcon = _react2.default.createElement(
                 "span",
@@ -44,7 +44,7 @@ var DialogTitle = function DialogTitle(props) {
     }
 
     var maximizeIcon;
-    if (props.hasMaximizeIcon) {
+    if (props.allowMaximize) {
         if (props.isMaximized) {
             maximizeIcon = _react2.default.createElement(
                 "span",
@@ -81,8 +81,8 @@ var DialogTitle = function DialogTitle(props) {
 
 DialogTitle.propTypes = {
     hasCloseIcon: _propTypes2.default.bool,
-    hasMinimizeIcon: _propTypes2.default.bool,
-    hasMaximizeIcon: _propTypes2.default.bool,
+    allowMinimize: _propTypes2.default.bool,
+    allowMaximize: _propTypes2.default.bool,
     isMinimized: _propTypes2.default.bool,
     isMaximized: _propTypes2.default.bool,
     title: _propTypes2.default.string,

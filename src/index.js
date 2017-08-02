@@ -14,7 +14,7 @@ class Dialog extends React.Component {
         super(props);
 
         this.state = {
-            height: props.height || 300,
+            height: props.height,
             width: props.width || 500,
             isMinimized: false,
             isMaximized: false
@@ -75,8 +75,8 @@ class Dialog extends React.Component {
             <DialogTitle
                 title={this.props.title}
                 hasCloseIcon={this.props.hasCloseIcon}
-                hasMinimizeIcon={this.props.hasMinimizeIcon}
-                hasMaximizeIcon={this.props.hasMaximizeIcon}
+                allowMinimize={this.props.allowMinimize}
+                allowMaximize={this.props.allowMaximize}
                 isMinimized={this.state.isMinimized}
                 isMaximized={this.state.isMaximized}
                 onMinimize={this.onMinimize}
@@ -90,7 +90,7 @@ class Dialog extends React.Component {
 
     render() {
 
-        var dialogBody;
+        let dialogBody;
         if (this.props.children) {
             dialogBody = this.props.children;
         } else if (React.isValidElement(this.props.body)) {
@@ -105,8 +105,8 @@ class Dialog extends React.Component {
             return false;
         }
 
-        var internalDialog = (
-            <div style={{ height: this.state.height, width: this.state.width }} className={cs("ui-dialog", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized })}>
+        let dialog = (
+            <div style={{ height: this.state.height || "auto", width: this.state.width }} className={cs("ui-dialog", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized })}>
                 {this.getDialogTitle()}
                 <DialogBody>
                     {dialogBody}
@@ -115,28 +115,28 @@ class Dialog extends React.Component {
             </div>
         );
 
-        var renderableDialog;
         if (this.props.isResizable) {
-            renderableDialog = (
+            dialog = (
                 <Resizable className="box" height={this.state.height} width={this.state.width} onResize={this.onResize}>
-                    {internalDialog}
+                    {dialog}
                 </Resizable>
             );
-        } else {
-            renderableDialog = internalDialog;
+        }
+
+        if (this.props.isDraggable) {
+            dialog = (
+                <Draggable handle=".ui-dialog-titlebar" bounds="body">
+                    {dialog}
+                </Draggable>
+            );
         }
 
         return (
             <div
                 ref={(container) => { this.dialogContainer = container; }}
-                className={cs("ui-dialog-container")}>
-                <Draggable handle=".ui-dialog-titlebar" bounds="body">
-                    {renderableDialog}
-                </Draggable>
-                {
-                    this.props.modal &&
-                    <div className="ui-dialog-overlay" style={{ zIndex: 100 }}></div>
-                }
+                className={cs("ui-dialog-container", { "": this.props.modal })}>
+                {dialog}
+                {this.props.modal && <div className="ui-dialog-overlay"></div>}
             </div>
         );
     }
@@ -147,8 +147,8 @@ Dialog.propTypes = {
     width: PropTypes.number,
     modal: PropTypes.bool,
     hasCloseIcon: PropTypes.bool,
-    hasMinimizeIcon: PropTypes.bool,
-    hasMaximizeIcon: PropTypes.bool,
+    allowMinimize: PropTypes.bool,
+    allowMaximize: PropTypes.bool,
     isResizable: PropTypes.bool,
     title: PropTypes.string,
     body: PropTypes.string,

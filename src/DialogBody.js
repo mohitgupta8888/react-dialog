@@ -4,7 +4,7 @@ import React from "react";
 class DialogBody extends React.Component {
     render() {
         return (
-            <div className="ui-dialog-content custom--filters pa2" style={{ "overflowY": "auto" }}>
+            <div className="ui-dialog-content" style={{ "overflowY": "auto" }}>
                 {this.props.children}
             </div>
         );

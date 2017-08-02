@@ -15,34 +15,81 @@ All styles written in CSS and are in css/index.css
 
 ## Demo
 
-http://mohitgupta8888.github.io/react-dialog-modal
+[http://mohitgupta8888.github.io/react-dialog-modal](https://mohitgupta8888.github.io/react-dialog/?selectedKind=React%20Dialog&selectedStory=basic&full=0&down=0&left=1&panelRight=0)
 
 ## Usage
 
 ```javascript
 import Dialog from 'react-dialog-modal'
-<Dialog
-    title="Dialog Title"
-    modal={true}
-    onClose={this.handleClose}
-    buttons={
-        [{
-            text: "Close",
-            onClick: () => this.handleClose()
-        }]
-    }>
-    <h1>Dialog Content</h1>
-    <p>More Content. Anything goes here</p>
-</Dialog>
+class Example extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            isDialogOpen: false
+        }
+    }
+
+    openDialog = () => this.setState({ isDialogOpen: true })
+
+    handleClose = () => this.setState({ isDialogOpen: false })
+
+    render() {
+        return (
+            <div className="container">
+                <button type="button" onClick={this.openDialog}>Open Dialog</button>
+                {
+                    this.state.isDialogOpen &&
+                    <Dialog
+                        title="Dialog Title"
+                        modal={true}
+                        onClose={this.handleClose}
+                        buttons={
+                            [{
+                                text: "Close",
+                                onClick: () => this.handleClose()
+                            }]
+                        }>
+                        <h1>Dialog Content</h1>
+                        <p>More Content. Anything goes here</p>
+                    </Dialog>
+                }
+            </div>
+        );
+    }
+}
 ```
 
 ## API
+
+#### props.height
+
+ - `Number`
+ - default: "auto"
+ - Whether overlay is added to dialog or not
+
+#### props.width
+
+ - `Number`
+ - default: false
+ - Whether overlay is added to dialog or not
 
 #### props.modal
 
  - `Boolean`
  - default: false
  - Whether overlay is added to dialog or not
+
+#### props.isDraggable
+
+ - `Boolean`
+ - default: false
+ - Whether dialog is draggable
+
+#### props.isResizable
+
+ - `Boolean`
+ - default: false
+ - Whether dialog is resizable
 
 #### props.title
 
