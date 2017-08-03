@@ -36,10 +36,6 @@ class Dialog extends React.Component {
         EventStack.removeListenable(this.eventToken);
     }
 
-    componentDidMount() {
-        this.dialogContainer.focus();
-    }
-
     handleGlobalKeydown = (e) => {
         if (e.keyCode == 27) {
             e.stopPropagation();
@@ -83,7 +79,6 @@ class Dialog extends React.Component {
                 onMaximize={this.onMaximize}
                 onRestore={this.onRestore}
                 onClose={this.onClose}
-                titlebuttons={this.props.titlebuttons}
             />
         );
     }
@@ -108,14 +103,17 @@ class Dialog extends React.Component {
         let dialog = (
             <div style={{ height: this.state.height || "auto", width: this.state.width }} className={cs("ui-dialog", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized })}>
                 {this.getDialogTitle()}
-                <DialogBody>
-                    {dialogBody}
-                </DialogBody>
-                <DialogFooter buttons={this.props.buttons} onClose={this.onClose}></DialogFooter>
+                {
+                    !this.state.isMinimized && <DialogBody>{dialogBody}</DialogBody>
+                }
+                {
+                    !this.state.isMinimized && <DialogFooter buttons={this.props.buttons} onClose={this.onClose}></DialogFooter>
+                }
+
             </div>
         );
 
-        if (this.props.isResizable) {
+        if (!this.state.isMinimized && !this.state.isMaximized && this.props.isResizable) {
             dialog = (
                 <Resizable className="box" height={this.state.height} width={this.state.width} onResize={this.onResize}>
                     {dialog}
@@ -123,7 +121,7 @@ class Dialog extends React.Component {
             );
         }
 
-        if (this.props.isDraggable) {
+        if (!this.state.isMinimized && !this.state.isMaximized && this.props.isDraggable) {
             dialog = (
                 <Draggable handle=".ui-dialog-titlebar" bounds="body">
                     {dialog}
@@ -133,7 +131,6 @@ class Dialog extends React.Component {
 
         return (
             <div
-                ref={(container) => { this.dialogContainer = container; }}
                 className={cs("ui-dialog-container", { "": this.props.modal })}>
                 {dialog}
                 {this.props.modal && <div className="ui-dialog-overlay"></div>}
@@ -157,9 +154,7 @@ Dialog.propTypes = {
     buttons: PropTypes.arrayOf(PropTypes.shape({
         text: PropTypes.string,
         onClick: PropTypes.func
-    })),
-    titlebuttons: PropTypes.element,
-    isFooter: PropTypes.bool
+    }))
 };
 
 export default Dialog;

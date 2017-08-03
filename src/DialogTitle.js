@@ -1,14 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
-//import CloseIcon from "./CloseIcon";
 
 const DialogTitle = (props) => {
     var closeIcon;
     if (props.hasCloseIcon !== false) {
         closeIcon = (
-            <a className="ui-close" onClick={props.onClose}>
-                <i className="icon-close"></i>
-            </a>
+            <i className="icon icon-close" onClick={props.onClose}></i>
         );
     }
 
@@ -16,15 +13,11 @@ const DialogTitle = (props) => {
     if (props.allowMinimize) {
         if (props.isMinimized) {
             minimizeIcon = (
-                <span className="dib mr2">
-                    <i className="pointer icon icon-enlarge2" onClick={props.onRestore}></i>
-                </span>
+                <i className="icon icon-restore" onClick={props.onRestore}></i>
             );
         } else {
             minimizeIcon = (
-                <span className="dib mr2">
-                    <i className="icon icon-shrink2 pointer" onClick={props.onMinimize}></i>
-                </span>
+                <i className="icon icon-minimize" onClick={props.onMinimize}></i>
             );
         }
     }
@@ -33,15 +26,11 @@ const DialogTitle = (props) => {
     if (props.allowMaximize) {
         if (props.isMaximized) {
             maximizeIcon = (
-                <span className="dib mr2">
-                    <i className="icon icon-shrink2" onClick={props.onRestore}></i>
-                </span>
+                <i className="icon icon-restore" onClick={props.onRestore}></i>
             );
         } else {
             maximizeIcon = (
-                <span className="dib mr2">
-                    <i className="icon icon-enlarge2 pointer" onClick={props.onMaximize}></i>
-                </span>
+                <i className="icon icon-maximize" onClick={props.onMaximize}></i>
             );
         }
     }
@@ -54,7 +43,6 @@ const DialogTitle = (props) => {
             <div className="action-items">
                 {minimizeIcon}
                 {maximizeIcon}
-                {props.titlebuttons}
                 {closeIcon}
             </div>
         </header>

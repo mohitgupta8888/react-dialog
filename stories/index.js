@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import Css from "../css/index.css";
+import "../css/index.css";
 //import Basic from "./basic";
 import Dialog from "../src/index";
 import { exampleWrapper } from "./ExampleWrapper";
@@ -13,10 +13,18 @@ storiesOf('React Dialog', module)
       title="Dialog Title"
     />
   ))
+  .add('isDraggable:true', () => (
+    <EnhancedDialog
+      title="Dialog Title"
+      modal={true}
+      isDraggable={true}
+    />
+  ))
   .add('modal:true', () => (
     <EnhancedDialog
       title="Dialog Title"
       modal={true}
+      isDraggable={true}
     />
   ))
   .add('width:700', () => (
@@ -31,19 +39,30 @@ storiesOf('React Dialog', module)
       title="Dialog Title"
       modal={true}
       height={700}
-    />
-  ))
-  .add('isDraggable:true', () => (
-    <EnhancedDialog
-      title="Dialog Title"
-      modal={true}
       isDraggable={true}
     />
   ))
- .add('isResizable:true', () => (
+  .add('isResizable:true', () => (
     <EnhancedDialog
       title="Dialog Title"
       modal={true}
       isResizable={true}
+      isDraggable={true}
+    />
+  ))
+  .add('allowMinimize:true', () => (
+    <EnhancedDialog
+      title="Dialog Title"
+      modal={true}
+      allowMinimize={true}
+      isDraggable={true}
+    />
+  ))
+  .add('allowMaximize:true', () => (
+    <EnhancedDialog
+      title="Dialog Title"
+      modal={true}
+      allowMaximize={true}
+      isDraggable={true}
     />
   ));

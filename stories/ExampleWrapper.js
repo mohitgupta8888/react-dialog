@@ -16,7 +16,6 @@ const exampleWrapper = function (DialogComponent) {
         render() {
             return (
                 <div className="container">
-                    <button type="button" onClick={this.openDialog}>Open Dialog</button>
                     {
                         this.state.isDialogOpen &&
                         <DialogComponent
@@ -38,6 +37,11 @@ const exampleWrapper = function (DialogComponent) {
                             }
                         </DialogComponent>
                     }
+
+                    <h1>Sample body contents goes here</h1>
+                    <p>Another body content here</p>
+                    <button type="button" onClick={this.openDialog}>Open Dialog</button>
+                    <p>You can also <a onClick={this.openDialog}>click here</a> to open the same dialog</p>
                 </div>
             );
         }

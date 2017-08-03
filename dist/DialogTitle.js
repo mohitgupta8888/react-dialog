@@ -73,7 +73,6 @@ var DialogTitle = function DialogTitle(props) {
             { className: "action-items" },
             minimizeIcon,
             maximizeIcon,
-            props.titlebuttons,
             closeIcon
         )
     );

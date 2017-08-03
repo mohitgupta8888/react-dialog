@@ -119,8 +119,7 @@ var Dialog = function (_React$Component) {
                 onMinimize: _this.onMinimize,
                 onMaximize: _this.onMaximize,
                 onRestore: _this.onRestore,
-                onClose: _this.onClose,
-                titlebuttons: _this.props.titlebuttons
+                onClose: _this.onClose
             });
         };
 
@@ -226,9 +225,7 @@ Dialog.propTypes = {
     buttons: _propTypes2.default.arrayOf(_propTypes2.default.shape({
         text: _propTypes2.default.string,
         onClick: _propTypes2.default.func
-    })),
-    titlebuttons: _propTypes2.default.element,
-    isFooter: _propTypes2.default.bool
+    }))
 };
 
 exports.default = Dialog;
