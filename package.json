@@ -1,5 +1,5 @@
 {
-  "name": "react-dialog-modal",
+  "name": "react-dialog",
   "description": "Dialog component in react",
   "author": "Mohit Gupta <mohitgupta8888@gmail.com> (https://github.com/mohitgupta)",
   "user": "mohitgupta8888",
@@ -63,11 +63,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mohitgupta8888/react-dialog-modal"
+    "url": "https://github.com/mohitgupta8888/react-dialog"
   },
-  "homepage": "https://mohitgupta8888.github.io/react-dialog-modal/",
+  "homepage": "https://mohitgupta8888.github.io/react-dialog/",
   "bugs": {
-    "url": "https://github.com/mohitgupta8888/react-dialog-modal/issues"
+    "url": "https://github.com/mohitgupta8888/react-dialog/issues"
   },
   "keywords": [
     "react",

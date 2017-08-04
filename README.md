@@ -9,9 +9,9 @@ We are working hard to release 1.0.0 stable release at our earliest.
 
 ## Installation
 
-React Dialog is available as an [npm package](https://www.npmjs.org/package/react-dialog-modal).
+React Dialog is available as an [npm package](https://www.npmjs.org/package/react-dialog).
 ```sh
-npm install react-dialog-modal
+npm install react-dialog
 ```
 
 Use [browserify](http://browserify.org/) and [reactify](https://github.com/andreypopp/reactify) for dependency management and JSX transformation.
@@ -20,12 +20,12 @@ All styles written in CSS and are in css/index.css
 
 ## Demo
 
-[http://mohitgupta8888.github.io/react-dialog-modal](https://mohitgupta8888.github.io/react-dialog/?selectedKind=React%20Dialog&selectedStory=basic&full=0&down=0&left=1&panelRight=0)
+[http://mohitgupta8888.github.io/react-dialog](https://mohitgupta8888.github.io/react-dialog/?selectedKind=React%20Dialog&selectedStory=basic&full=0&down=0&left=1&panelRight=0)
 
 ## Usage
 
 ```javascript
-import Dialog from 'react-dialog-modal'
+import Dialog from 'react-dialog'
 class Example extends React.Component {
     constructor() {
         super();
