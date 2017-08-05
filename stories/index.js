@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import "../css/index.css";
-//import Basic from "./basic";
 import Dialog from "../src/index";
 import { exampleWrapper } from "./ExampleWrapper";
 
@@ -11,12 +10,6 @@ storiesOf('React Dialog', module)
   .add('basic', () => (
     <EnhancedDialog
       title="Dialog Title"
-    />
-  ))
-  .add('isDraggable:true', () => (
-    <EnhancedDialog
-      title="Dialog Title"
-      modal={true}
       isDraggable={true}
     />
   ))
@@ -27,6 +20,20 @@ storiesOf('React Dialog', module)
       isDraggable={true}
     />
   ))
+  .add('title: ReactElement', () => (
+    <EnhancedDialog
+      title={<span style={{color: 'green', fontStyle: 'italic'}}>Dialog Title</span>}
+      modal={true}
+      isDraggable={true}
+    />
+  ))
+  .add('isDraggable:false', () => (
+    <EnhancedDialog
+      title="Dialog Title"
+      modal={true}
+      isDraggable={false}
+    />
+  ))
   .add('width:700', () => (
     <EnhancedDialog
       title="Dialog Title"
@@ -34,11 +41,11 @@ storiesOf('React Dialog', module)
       width={700}
     />
   ))
-  .add('height:700', () => (
+  .add('height:500', () => (
     <EnhancedDialog
       title="Dialog Title"
       modal={true}
-      height={700}
+      height={500}
       isDraggable={true}
     />
   ))

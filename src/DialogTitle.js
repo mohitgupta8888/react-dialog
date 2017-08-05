@@ -1,36 +1,36 @@
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
 
-const DialogTitle = (props) => {
-    var closeIcon;
-    if (props.hasCloseIcon !== false) {
+const DialogTitle = ({ title, hasCloseIcon, onClose, allowMinimize, isMinimized, onMinimize, allowMaximize, isMaximized, onMaximize, onRestore }) => {
+    let closeIcon;
+    if (hasCloseIcon !== false) {
         closeIcon = (
-            <i className="icon icon-close" onClick={props.onClose}></i>
+            <i className="icon icon-close" onClick={onClose}></i>
         );
     }
 
-    var minimizeIcon;
-    if (props.allowMinimize) {
-        if (props.isMinimized) {
+    let minimizeIcon;
+    if (allowMinimize) {
+        if (isMinimized) {
             minimizeIcon = (
-                <i className="icon icon-restore" onClick={props.onRestore}></i>
+                <i className="icon icon-restore" onClick={onRestore}></i>
             );
         } else {
             minimizeIcon = (
-                <i className="icon icon-minimize" onClick={props.onMinimize}></i>
+                <i className="icon icon-minimize" onClick={onMinimize}></i>
             );
         }
     }
 
-    var maximizeIcon;
-    if (props.allowMaximize) {
-        if (props.isMaximized) {
+    let maximizeIcon;
+    if (allowMaximize) {
+        if (isMaximized) {
             maximizeIcon = (
-                <i className="icon icon-restore" onClick={props.onRestore}></i>
+                <i className="icon icon-restore" onClick={onRestore}></i>
             );
         } else {
             maximizeIcon = (
-                <i className="icon icon-maximize" onClick={props.onMaximize}></i>
+                <i className="icon icon-maximize" onClick={onMaximize}></i>
             );
         }
     }
@@ -38,7 +38,7 @@ const DialogTitle = (props) => {
     return (
         <header className="ui-dialog-titlebar">
             <div className="title">
-                {props.title}
+                {title}
             </div>
             <div className="action-items">
                 {minimizeIcon}
@@ -55,7 +55,7 @@ DialogTitle.propTypes = {
     allowMaximize: PropTypes.bool,
     isMinimized: PropTypes.bool,
     isMaximized: PropTypes.bool,
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     onClose: PropTypes.func.isRequired,
     onMinimize: PropTypes.func,
     onMaximize: PropTypes.func,

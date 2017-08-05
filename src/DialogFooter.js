@@ -1,19 +1,30 @@
-import PropTypes from "prop-types";
 import React from "react";
-import DialogButton from "./DialogButton";
+import PropTypes from "prop-types";
+import cs from "classnames";
 
 const DialogFooter = (props) => {
-    var buttons = props.buttons;
-    if (!buttons)
+    const buttons = props.buttons;
+    if (!buttons || buttons.length == 0) {
         return false;
+    }
 
-    var dialogButtons = [];
-    buttons.forEach(function (button, index) {
-        dialogButtons.push(<DialogButton key={"button-" + index} {...button} onClose={props.onClose} />);
+    const dialogButtons = buttons.map(function (button, index) {
+        if (React.isValidElement(button)) {
+            return button;
+        }
+
+        const { text, onClick, className } = button;
+
+        return (
+            <button
+                key={`button-${index}`}
+                type="button"
+                className={cs("button", className)}
+                onClick={onClick}>
+                {text}
+            </button>
+        );
     }, this);
-
-    if (dialogButtons.length == 0)
-        return false;
 
     return (
         <div className="ui-dialog-buttonpane">

@@ -22,7 +22,7 @@ const exampleWrapper = function (DialogComponent) {
                             {...this.props}
                             onClose={this.handleClose}
                             buttons={
-                                [{
+                                this.props.buttons || [{
                                     text: "Close",
                                     onClick: () => this.handleClose()
                                 }]
