@@ -55,7 +55,7 @@ DialogTitle.propTypes = {
     allowMaximize: PropTypes.bool,
     isMinimized: PropTypes.bool,
     isMaximized: PropTypes.bool,
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     onClose: PropTypes.func.isRequired,
     onMinimize: PropTypes.func,
     onMaximize: PropTypes.func,

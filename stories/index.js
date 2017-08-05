@@ -13,18 +13,25 @@ storiesOf('React Dialog', module)
       isDraggable={true}
     />
   ))
-  .add('isDraggable:true', () => (
+  .add('modal:true', () => (
     <EnhancedDialog
       title="Dialog Title"
       modal={true}
       isDraggable={true}
     />
   ))
-  .add('modal:true', () => (
+  .add('title: ReactElement', () => (
+    <EnhancedDialog
+      title={<span style={{color: 'green', fontStyle: 'italic'}}>Dialog Title</span>}
+      modal={true}
+      isDraggable={true}
+    />
+  ))
+  .add('isDraggable:false', () => (
     <EnhancedDialog
       title="Dialog Title"
       modal={true}
-      isDraggable={true}
+      isDraggable={false}
     />
   ))
   .add('width:700', () => (
@@ -34,11 +41,11 @@ storiesOf('React Dialog', module)
       width={700}
     />
   ))
-  .add('height:700', () => (
+  .add('height:500', () => (
     <EnhancedDialog
       title="Dialog Title"
       modal={true}
-      height={700}
+      height={500}
       isDraggable={true}
     />
   ))

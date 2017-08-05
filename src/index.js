@@ -13,7 +13,7 @@ class Dialog extends React.Component {
         super(props);
 
         this.state = {
-            height: props.height,
+            height: props.height || 300,
             width: props.width || 500,
             isMinimized: false,
             isMaximized: false
@@ -84,30 +84,33 @@ class Dialog extends React.Component {
     }
 
     render() {
+        const { height, width, isMinimized, isMaximized } = this.state;
+        const { modal, isDraggable, isResizable, buttons, children } = this.props;
+
         let dialog = (
-            <div style={{ height: this.state.height || "auto", width: this.state.width }} className={cs("ui-dialog", { "minimized": this.state.isMinimized, "maximized": this.state.isMaximized })}>
+            <div style={{ height: height, width, transform: `translate(-${width / 2}px, -${height / 2}px)` }} className={cs("ui-dialog", { "minimized": isMinimized, "maximized": isMaximized })}>
                 {this.getDialogTitle()}
                 {
-                    !this.state.isMinimized && <DialogBody>{this.props.children}</DialogBody>
+                    !isMinimized && <DialogBody>{children}</DialogBody>
                 }
                 {
-                    !this.state.isMinimized && <DialogFooter buttons={this.props.buttons} onClose={this.onClose}></DialogFooter>
+                    !isMinimized && <DialogFooter buttons={buttons} onClose={this.onClose}></DialogFooter>
                 }
 
             </div>
         );
 
-        if (!this.state.isMinimized && !this.state.isMaximized && this.props.isResizable) {
+        if (!isMinimized && !isMaximized && isResizable) {
             dialog = (
-                <Resizable className="box" height={this.state.height} width={this.state.width} onResize={this.onResize}>
+                <Resizable className="box" height={height} width={width} onResize={this.onResize}>
                     {dialog}
                 </Resizable>
             );
         }
 
-        if (!this.state.isMinimized && !this.state.isMaximized && this.props.isDraggable) {
+        if (!isMinimized && !isMaximized && isDraggable !== false) {
             dialog = (
-                <Draggable handle=".ui-dialog-titlebar" bounds="body">
+                <Draggable handle=".ui-dialog-titlebar" bounds="body" defaultPosition={{ x: -width / 2, y: -height / 2 }}>
                     {dialog}
                 </Draggable>
             );
@@ -115,9 +118,9 @@ class Dialog extends React.Component {
 
         return (
             <div
-                className={cs("ui-dialog-container", { "": this.props.modal })}>
+                className={cs("ui-dialog-container", { "": modal })}>
                 {dialog}
-                {this.props.modal && <div className="ui-dialog-overlay"></div>}
+                {modal && <div className="ui-dialog-overlay"></div>}
             </div>
         );
     }

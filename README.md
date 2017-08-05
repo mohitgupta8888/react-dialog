@@ -69,7 +69,7 @@ class Example extends React.Component {
 #### props.height
 
  - `Number`
- - default: "auto"
+ - default: `300`
  - Whether overlay is added to dialog or not
 
 #### props.width
@@ -134,13 +134,14 @@ class Example extends React.Component {
 
 #### props.buttons
 
- - ```arrayOf({
+ ```arrayOf({
         text: string,
         onClick: Function,
         className: string
-    })```
+    })
     or
- - `arrayOf(ReactElements)`
+    arrayOf(ReactElements)
+ ```
  - Default: `null`
  - Represents the collection of buttons to be render in dialog footer
 

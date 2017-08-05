@@ -22,6 +22,8 @@ a {
 
 .ui-dialog {
     position: fixed;
+    top: 50%;
+    left: 50%;
     outline: 0 none;
     padding: 0 !important;;
     z-index: 101;
@@ -101,24 +103,24 @@ a {
     border: 0 none;
     overflow: auto;
     position: relative;
-    padding: .5em 1em;
+    padding: 0.5em;
 }
 
 .ui-dialog .ui-dialog-buttonpane {
     position: absolute;
     width: 100%;
     bottom: 0;
-}
-
-.ui-dialog-buttonpane .ui-dialog-buttonset{
     text-align: right;
     border-width: 1px 0 0 0;
-    margin: .3em 1em .5em .4em;
     border-top: 1px solid #f6f6f6;
 }
 
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset{
+    padding: 0.5em;
+}
+
 .ui-dialog .ui-dialog-buttonpane button {
-	margin: .5em .4em .5em 0;
+	margin: 0 .5em 0 .5em;
     cursor: pointer;
     background-color: #f6f6f6;
     padding: 0.5em 1em;
