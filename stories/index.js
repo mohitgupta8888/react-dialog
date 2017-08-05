@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 import "../css/index.css";
-//import Basic from "./basic";
 import Dialog from "../src/index";
 import { exampleWrapper } from "./ExampleWrapper";
 
@@ -11,6 +10,7 @@ storiesOf('React Dialog', module)
   .add('basic', () => (
     <EnhancedDialog
       title="Dialog Title"
+      isDraggable={true}
     />
   ))
   .add('isDraggable:true', () => (

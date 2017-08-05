@@ -52,7 +52,6 @@
     "active-event-stack": "^1.0.0",
     "babel-runtime": "^6.5.0",
     "classnames": "^2.2.3",
-    "react-center-component": "^3.0.0",
     "react-draggable": "^2.2.6",
     "react-onclickoutside": "^5.10.0",
     "react-resizable": "^1.7.1"
