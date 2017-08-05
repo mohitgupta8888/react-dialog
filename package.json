@@ -3,7 +3,7 @@
   "description": "Dialog component in react",
   "author": "Mohit Gupta <mohitgupta8888@gmail.com> (https://github.com/mohitgupta)",
   "user": "mohitgupta8888",
-  "version": "0.3.20",
+  "version": "1.0.0",
   "scripts": {
     "prepublish": "bash .scripts/prepublish.sh",
     "lint": "eslint src",

@@ -2,11 +2,6 @@
 
 React component for dialog widget.
 
-## Warning
-React Dialog is under rapid development phase where we are releasing updates almost everyday.
-Untill 1.0.0 release, you might see some updates on regular basis.
-We are working hard to release 1.0.0 stable release at our earliest.
-
 ## Installation
 
 React Dialog is available as an [npm package](https://www.npmjs.org/package/react-dialog).
