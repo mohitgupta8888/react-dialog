@@ -129,13 +129,14 @@ class Example extends React.Component {
 
 #### props.buttons
 
- ```arrayOf({
+ ```
+    [{
         text: string,
         onClick: Function,
         className: string
-    })
+    }]
     or
-    arrayOf(ReactElements)
+    [ReactElements]
  ```
  - Default: `null`
  - Represents the collection of buttons to be render in dialog footer
