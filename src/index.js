@@ -13,8 +13,8 @@ class Dialog extends React.Component {
         super(props);
 
         this.state = {
-            height: props.height || 300,
-            width: props.width || 500,
+            height: props.height,
+            width: props.width,
             isMinimized: false,
             isMaximized: false
         };
@@ -36,7 +36,7 @@ class Dialog extends React.Component {
     }
 
     handleGlobalKeydown = (e) => {
-        if (this.props.closeOnEscape !== false && e.keyCode == 27) {
+        if (this.props.closeOnEscape && e.keyCode == 27) {
             e.stopPropagation();
             this.onClose();
         }
@@ -85,10 +85,11 @@ class Dialog extends React.Component {
 
     render() {
         const { height, width, isMinimized, isMaximized } = this.state;
-        const { modal, isDraggable, isResizable, buttons, children } = this.props;
+        const { modal, isDraggable, isResizable, buttons, children, position } = this.props;
+        const { x = -width / 2, y = -height / 2 } = position;
 
         let dialog = (
-            <div style={{ height: height, width, transform: `translate(-${width / 2}px, -${height / 2}px)` }} className={cs("ui-dialog", { "minimized": isMinimized, "maximized": isMaximized })}>
+            <div style={{ height: height, width, transform: `translate(${x}px, ${y}px)` }} className={cs("ui-dialog", { "minimized": isMinimized, "maximized": isMaximized })}>
                 {this.getDialogTitle()}
                 {
                     !isMinimized && <DialogBody>{children}</DialogBody>
@@ -110,7 +111,7 @@ class Dialog extends React.Component {
 
         if (!isMinimized && !isMaximized && isDraggable !== false) {
             dialog = (
-                <Draggable handle=".ui-dialog-titlebar" bounds="body" defaultPosition={{ x: -width / 2, y: -height / 2 }}>
+                <Draggable handle=".ui-dialog-titlebar" bounds="body" defaultPosition={{ x, y }}>
                     {dialog}
                 </Draggable>
             );
@@ -130,13 +131,17 @@ Dialog.propTypes = {
     height: PropTypes.number,
     width: PropTypes.number,
     modal: PropTypes.bool,
+    position: PropTypes.shape({
+        x: PropTypes.number,
+        y: PropTypes.number
+    }),
     hasCloseIcon: PropTypes.bool,
     allowMinimize: PropTypes.bool,
     allowMaximize: PropTypes.bool,
     isResizable: PropTypes.bool,
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     closeOnEscape: PropTypes.bool,
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func,
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.element]).isRequired,
     buttons: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.shape({
@@ -145,6 +150,22 @@ Dialog.propTypes = {
         })),
         PropTypes.arrayOf(PropTypes.element)
     ])
+};
+
+Dialog.defaultProps = {
+    height: 300,
+    width: 500,
+    modal: false,
+    closeOnEscape: true,
+    isDraggable: false,
+    isResizable: false,
+    title: '',
+    hasCloseIcon: true,
+    allowMinimize: false,
+    allowMaximize: false,
+    onClose: null,
+    buttons: null,
+    position: { x: -250, y: -150 }
 };
 
 export default Dialog;
