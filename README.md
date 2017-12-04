@@ -20,42 +20,42 @@ All styles written in CSS and are in css/index.css
 ## Usage
 
 ```javascript
-import Dialog from 'react-dialog'
-class Example extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            isDialogOpen: false
+import React, { Component } from 'react';
+import Dialog from 'react-dialog';
+
+// Be sure to include styles at some point, probably during your bootstrapping
+import 'react-dialog/css/index.css';
+
+class Example extends Component {
+  state = {
+    isDialogOpen: false
+  }
+
+  openDialog = () => this.setState({ isDialogOpen: true })
+
+  handleClose = () => this.setState({ isDialogOpen: false })
+
+  render() {
+    return (
+      <div className="container">
+        <button type="button" onClick={this.openDialog}>Open Dialog</button>
+        {this.state.isDialogOpen &&
+          <Dialog
+            title="Dialog Title"
+            modal
+            onClose={this.handleClose}
+            buttons={[{
+              text: 'Close',
+              onClick: () => this.handleClose()
+            }]}
+          >
+            <h1>Dialog Content</h1>
+            <p>More Content. Anything goes here</p>
+          </Dialog>
         }
-    }
-
-    openDialog = () => this.setState({ isDialogOpen: true })
-
-    handleClose = () => this.setState({ isDialogOpen: false })
-
-    render() {
-        return (
-            <div className="container">
-                <button type="button" onClick={this.openDialog}>Open Dialog</button>
-                {
-                    this.state.isDialogOpen &&
-                    <Dialog
-                        title="Dialog Title"
-                        modal={true}
-                        onClose={this.handleClose}
-                        buttons={
-                            [{
-                                text: "Close",
-                                onClick: () => this.handleClose()
-                            }]
-                        }>
-                        <h1>Dialog Content</h1>
-                        <p>More Content. Anything goes here</p>
-                    </Dialog>
-                }
-            </div>
-        );
-    }
+      </div>
+    );
+  }
 }
 ```
 
@@ -130,17 +130,37 @@ class Example extends React.Component {
 #### props.buttons
 
  ```
-    [{
-        text: string,
-        onClick: Function,
-        className: string
-    }]
-    or
-    [ReactElements]
+[{
+    text: string,
+    onClick: Function,
+    className: string
+}]
+```
+or
+```
+[ReactElements]
  ```
  - Default: `null`
  - Represents the collection of buttons to be render in dialog footer
 
+
+#### props.position
+
+```
+{
+    x: number,
+    y: number
+}
+ ```
+ - default: center of the screen:
+```
+{
+    x: -250, // -width / 2
+    y: -150  // -height / 2
+}
+ ```
+ 
+ - The shift in the `x` and `y` axis relative to the center of the screen (`{ x: 0, y: 0 }`)
 
 ## License
 
