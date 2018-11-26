@@ -128,8 +128,14 @@ class Dialog extends React.Component {
 }
 
 Dialog.propTypes = {
-    height: PropTypes.number,
-    width: PropTypes.number,
+    height: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
+    width: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
     modal: PropTypes.bool,
     position: PropTypes.shape({
         x: PropTypes.number,
