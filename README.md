@@ -63,13 +63,13 @@ class Example extends Component {
 
 #### props.height
 
- - `Number`
+ - `Number` || `String`
  - default: `300`
- - Whether overlay is added to dialog or not
+ - Specifies the width of Dialog (String or Number) '80%' or '500'
 
 #### props.width
 
- - `Number`
+ - `Number` || `String`
  - default: `500`
  - Whether overlay is added to dialog or not
 
